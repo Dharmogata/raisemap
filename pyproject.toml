@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "raisemap"
+version = "0.1.0"
+description = "Static exception map for Python: which exceptions can escape each function, and where the docstring disagrees."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = []
+keywords = ["static-analysis", "linter", "ast"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Quality Assurance",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "coverage>=7", "ruff>=0.6"]
+
+[project.scripts]
+raisemap = "raisemap.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/raisemap"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+extend-exclude = ["examples"]
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+
+[project.urls]
+Homepage = "https://github.com/Dharmogata/raisemap"
+Issues = "https://github.com/Dharmogata/raisemap/issues"
